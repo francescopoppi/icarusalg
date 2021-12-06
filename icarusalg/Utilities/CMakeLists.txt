@@ -1,8 +1,8 @@
 
 cet_make(
   LIBRARIES
-    ${CETLIB_EXCEPT}
-    ${CLHEP}
+    cetlib_except::cetlib_except
+    CLHEP::CLHEP
   )
 
 install_headers()

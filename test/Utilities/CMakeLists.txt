@@ -3,10 +3,10 @@ cet_test(ChangeMonitor_test USE_BOOST_UNIT)
 
 cet_test(FastAndPoorGauss_test
   LIBRARIES
-    ${ROOT_MATHCORE}
-    ${ROOT_HIST}
-    ${ROOT_RIO}
-    ${ROOT_CORE}
+    ROOT::MathCore
+    ROOT::Hist
+    ROOT::RIO
+    ROOT::Core
   USE_BOOST_UNIT
   )
 
@@ -23,6 +23,6 @@ cet_test(BinningSpecs_test
 cet_test(NonRandomCounter_test
   LIBRARIES
     icarusalg_Utilities
-    ${CLHEP}
+    CLHEP::CLHEP
   USE_BOOST_UNIT
   )

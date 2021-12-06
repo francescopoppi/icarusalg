@@ -11,11 +11,10 @@ cet_test(geometry_icarus_test
   LIBRARIES icarusalg_Geometry
             larcorealg_Geometry
             larcorealg::GeometryTestLib
-            ${MF_MESSAGELOGGER}
-            ${MF_UTILITIES}
-            ${FHICLCPP}
-            cetlib_except
-	    ${ROOT_CORE}
+            messagefacility::MF_MessageLogger
+            fhiclcpp::fhiclcpp
+            cetlib_except::cetlib_except
+	    ROOT::Core
 #  OPTIONAL_GROUPS Broken
 )
 
@@ -28,11 +27,10 @@ cet_test(geometry_iterator_icarus_test
   LIBRARIES icarusalg_Geometry
             larcorealg_Geometry
             larcorealg::GeometryTestLib
-            ${MF_MESSAGELOGGER}
-            ${MF_UTILITIES}
-            ${FHICLCPP}
-            cetlib_except
-	    ${ROOT_CORE}
+            messagefacility::MF_MessageLogger
+            fhiclcpp::fhiclcpp
+            cetlib_except::cetlib_except
+	    ROOT::Core
   USE_BOOST_UNIT
 )
 
@@ -44,11 +42,10 @@ cet_test(geometry_iterator_loop_icarus_test
   LIBRARIES icarusalg_Geometry
             larcorealg_Geometry
             larcorealg::GeometryTestLib
-            ${MF_MESSAGELOGGER}
-            ${MF_UTILITIES}
-            ${FHICLCPP}
-            cetlib_except
-	    ${ROOT_CORE}
+            messagefacility::MF_MessageLogger
+            fhiclcpp::fhiclcpp
+            cetlib_except::cetlib_except
+	    ROOT::Core
 )
 
 
