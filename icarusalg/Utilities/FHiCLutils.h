@@ -1,6 +1,6 @@
 /**
  * @file   icarusalg/Utilities/FHiCLutils.h
- * @brief  Plots to inform trigger design decisions.
+ * @brief  Simple helper functions to deal with FHiCL.
  * @author Gianluca Petrillo (petrillo@slac.stanford.edu)
  * @date   August 8, 2019
  * 
