@@ -1004,6 +1004,9 @@ def cernTopTagger():
         posname = 'pos' + v.attrib['name']
         ET.SubElement(pv, 'position', name=posname, unit="cm", x=str(xc), y=str(yc), z=str(zc))
 
+        posname = 'rot' + v.attrib['name']
+        ET.SubElement(pv, 'rotation', name=posname, unit="deg", x='0', y='180', z='0')
+
     return stagger, vtagger
 
 def cernLatRimTagger(side='L'):
@@ -1061,6 +1064,10 @@ def cernLatRimTagger(side='L'):
         posname = 'pos' + v.attrib['name']
         ET.SubElement(pv, 'position', name=posname, unit="cm", x=str(xc), y=str(yc), z=str(zc))
 
+        if side == 'L':
+            posname = 'rot' + v.attrib['name']
+            ET.SubElement(pv, 'rotation', name=posname, unit='deg', x='0', y='180', z='0')
+
     return stagger, vtagger
 
 
@@ -1117,6 +1124,14 @@ def cernLongRimTagger(side='U'):
 
         posname = 'pos' + v.attrib['name']
         ET.SubElement(pv, 'position', name=posname, unit="cm", x=str(xc), y=str(yc), z=str(zc))
+
+        if side == 'U':
+            posname = 'rot' + v.attrib['name']
+            ET.SubElement(pv, 'rotation', name=posname, unit='deg', x='0', y='90', z='0')
+
+        if side == 'D':
+            posname = 'rot' + v.attrib['name']
+            ET.SubElement(pv, 'rotation', name=posname, unit='deg', x='0', y='-90', z='0')
 
     return stagger, vtagger
 
@@ -1280,7 +1295,7 @@ def detectorEnclosure():
 
     posname = 'pos' + vtt.attrib['name']
     ET.SubElement(pv, 'position', name=posname, unit="cm", x=str(xc), y=str(yc), z=str(zc)) 
-   
+
     #position CERN west rim
     pv = ET.SubElement(vshell, 'physvol')
     ET.SubElement(pv, 'volumeref', ref=vrw.attrib['name'])
