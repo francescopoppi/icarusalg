@@ -1,11 +1,11 @@
-<?xml version='1.0'?>
+    <?xml version='1.0'?>
 <gdml>
 <define>
 
-   <position name="posRaceTrackTInTPC" unit="cm" x="0.268550000000005" y="160.11005" z="0"/>
-   <position name="posRaceTrackBInTPC" unit="cm" x="0.268550000000005" y="-160.10985" z="0"/>
-   <position name="posRaceTrackUInTPC" unit="cm" x="0.268550000000005" y="0"  z="-903.30005"/>
-   <position name="posRaceTrackDInTPC" unit="cm" x="0.268550000000005" y="0"  z="903.30005"/>
+   <position name="posRaceTrackTInTPC" unit="cm" x="0.268550000000005" y="160.11005" z="39.975276135419"/>
+   <position name="posRaceTrackBInTPC" unit="cm" x="0.268550000000005" y="-160.10985" z="39.975276135419"/>
+   <position name="posRaceTrackUInTPC" unit="cm" x="0.268550000000005" y="0" z="-410.824773864581"/>
+   <position name="posRaceTrackDInTPC" unit="cm" x="0.268550000000005" y="0" z="410.824773864581"/>
 
 </define>   
 <!--+++++++++++++++++++ RACETRACK Solids +++++++++++++++++++-->
@@ -16,12 +16,12 @@
  <box name="RaceTrackTVolume"
   x="143.8429"
   y="3.4002"
-  z="1810.0001" 
+  z="905.0001" 
   lunit="cm" />
  <box name="RaceTrackBVolume"
   x="143.8429"
   y="3.4002"
-  z="1810.0001" 
+  z="905.0001" 
   lunit="cm"/>
  <box name="RaceTrackUVolume"
   x="143.8429"
@@ -31,14 +31,14 @@
  <tube name="RaceTrackTTubeVolume"
   rmax="1.7"
   rmin="1.62"
-  z="1810" 
+  z="905" 
   deltaphi="360"
   aunit="deg"
   lunit="cm"/>
  <tube name="RaceTrackBTubeVolume"
   rmax="1.7"
   rmin="1.62"
-  z="1810" 
+  z="905" 
   deltaphi="360"
   aunit="deg"
   lunit="cm"/>

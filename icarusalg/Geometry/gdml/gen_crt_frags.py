@@ -44,7 +44,7 @@ LEDGERISERHEIGTH = 46.99 #wide flange type, W18 x 71
 TOPCRTBEAMTOFLOOR = 970.8
 CRTBEAMSPACING = 92.71 #horizontal center to center spacing between top CRT support beams
 
-BOTTOMCRTROLLERHEIGHT = 3.02 #distance between bottom CRT module and pit floor
+BOTTOMCRTROLLERHEIGHT = 3.02  #distance between bottom CRT module and pit floor
 SIDECRTWVOFFSET = 4.13 #set by fiberglass Unistrut standoffs (given as ~4cm, but it's Unitstrut so I assume it was rounded
 SIDECRTPOSTWIDTH = 4.13 #Unistruit vertical support posts, dimension normal to side CRT plane
 SIDECRTPOSTSPACING = 4.13 #set by Unistruit bracket shelf
@@ -137,8 +137,11 @@ CERNROOFL = NTOPZ*cModW+(NTOPZ-1)*CERNMODSPACE
 #CRT shell
 SHELLY = 1.1*cModH+TOPCRTBEAMTOFLOOR-BOTTOMCRTROLLERHEIGHT*0.9
 #MINOS sections positions
-MINOSSOUTHY = -0.5*SHELLY+0.5*(NMODSTACKSOUTHY*mModW+(NMODSTACKSOUTHY-1)*SIDECRTSHELFTHICK+2*PADTagger)+WVFOOTELEVATION
-MINOSLATFIXY = MINOSSOUTHY
+#ORIGINAL definition
+#MINOSSOUTHY = -0.5*SHELLY+0.5*(NMODSTACKSOUTHY*mModW+(NMODSTACKSOUTHY-1)*SIDECRTSHELFTHICK+2*PADTagger)+WVFOOTELEVATION
+#MINOSLATFIXY = MINOSSOUTHY
+MINOSSOUTHY = -0.5*SHELLY+0.5*(NMODSTACK*mModW+(NMODSTACK-1)*SIDECRTSHELFTHICK+2*PADTagger)+WVFOOTELEVATION+18
+MINOSLATFIXY = -0.5*SHELLY+0.5*(NMODSTACK*mModW+(NMODSTACK-1)*SIDECRTSHELFTHICK+2*PADTagger)+WVFOOTELEVATION+5
 MINOSLATROLLY = MINOSLATFIXY-0.5*mModW+10
 MINOSLATSOUTHACTIVEOVERHANG = 2*MINOSSNOUTLENGTH
 MINOSLATSOUTHZ = -0.5*WVLENGTH + 0.5*mModL - 0.5*MINOSLATSOUTHACTIVEOVERHANG
@@ -638,12 +641,28 @@ def minosSideTagger(side='e', pos='n'):
             if pos=='n':
                 modules.append(module('m','en'))
                 if i==0: vname+='EastNorth'
-        fmod+=1
-        modToFeb[mod_id] = ((feb_id-1,fmod),(feb_id,fmod))
-        if fmod==3:
-            fmod=0
-            if i != len(coords)-1: feb_id+=2
 
+        if (side=='w' and pos=='c') or (side=='e' and pos=='c'):
+            if (i < 2 or (i >= 8 and i < 10)):
+                fmod+=1
+                modToFeb[mod_id] = ((feb_id-1,fmod),(feb_id,fmod))
+                if fmod==2:
+                    fmod=0
+                    if i != len(coords)-1: feb_id+=2
+            if((i>= 2 and i < 8) or i > 9):
+                fmod+=1
+                modToFeb[mod_id] = ((feb_id-1,fmod),(feb_id,fmod))
+                if fmod==3:
+                    fmod=0
+                    if i != len(coords)-1: feb_id+=2
+        else :
+
+            fmod+=1
+            modToFeb[mod_id] = ((feb_id-1,fmod),(feb_id,fmod))
+            if fmod==3:
+                fmod=0
+                if i != len(coords)-1: feb_id+=2
+                
     if printModIds: print('   last module: '+str(mod_id)+', last FEB: '+str(feb_id))
     #print('dictionary generated:')
     #for k in modToFeb.keys():
@@ -704,7 +723,7 @@ def minosNorthTagger():
 
         for i in range(4):
             rowmodules.append(module('m','nn',minosCutModLengthNorth[row]))
-            modToFeb[mod_id] = (feb_id-3+i,fmod/4)
+            modToFeb[mod_id] = (feb_id-3+i, int(fmod/4))
 
         modules.append(rowmodules)
         if fmod==12:
@@ -1138,7 +1157,9 @@ def cernLongRimTagger(side='U'):
 def detectorEnclosure():
 
     #shell outer and void dimensions
-    WVPADY = 25
+    #Original definition
+    #WVPADY = 25 
+    WVPADY = 25 + 18
     xxint = str(WVWIDTH + 2*SIDECRTWVOFFSET)
     yyint = str(WVHEIGHT+1.0+WVPADY) 
     zzint = str(WVLENGTH+2*SIDECRTWVOFFSET) 
@@ -1295,7 +1316,7 @@ def detectorEnclosure():
 
     posname = 'pos' + vtt.attrib['name']
     ET.SubElement(pv, 'position', name=posname, unit="cm", x=str(xc), y=str(yc), z=str(zc)) 
-
+   
     #position CERN west rim
     pv = ET.SubElement(vshell, 'physvol')
     ET.SubElement(pv, 'volumeref', ref=vrw.attrib['name'])
